@@ -1,0 +1,26 @@
+{
+    "data": [
+        {
+            "hash": "f1502a683a98bd828ffaccc29cb6189ce171952f1da7f4e346ae51dbd5f63274",
+            "name": "1.jpg",
+            "path": "./images",
+            "type": "jpg"
+        },
+        {
+            "hash": "fea25e92074c213efb62e37b6c92e6d7dbe2f57f24a9dcd6f2b5d5562bb656b1",
+            "name": "3.jpg",
+            "path": "./images",
+            "type": "jpg"
+        }
+    ],
+    "paths": [
+        "./images",
+        "."
+    ],
+    "types": [
+        "jpg",
+        "png",
+        "bmp",
+        "jpeg"
+    ]
+}
