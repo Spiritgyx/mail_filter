@@ -1,5 +1,6 @@
 import sys
 from dbhash import *
+import traffic_sniff as TS
 
 
 class Main:
@@ -18,12 +19,22 @@ class Main:
                     if value == 'gui':
                         self.mode = 'gui'
         dprint(self.debug, 'DEBUG = TRUE')
-        # test
+        # test hash
         self.dbh = DBHash(debug=self.debug)
         self.dbh.jsonLoad()
         self.dbh.jsonCheckCurrentData()
         self.dbh.jsonCheckNewData()
         self.dbh.jsonSave()
+        # test sniffer
+        self.ts = TS.TSniffer(debug=self.debug)
+        self.ts.thread.start()
+        summ = hashlib.sha256()
+        while True:
+            if len(self.ts.data) > 0:
+                packet = self.ts.data.pop(0)
+                summ.update(packet[1])
+                if self.dbh.jsonCheckExist(summ.hexdigest()):
+                    pass
         pass
 
 

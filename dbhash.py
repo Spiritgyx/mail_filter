@@ -112,3 +112,7 @@ class DBHash:
         name = os.path.basename(path)
         type_ = str(name).split('.')[-1]
         return True, {'name': name, 'type': type_, 'path': dirPath, 'hash': summ}
+
+    def jsonCheckExist(self, summ):
+        return False
+        pass
