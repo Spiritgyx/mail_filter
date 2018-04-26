@@ -114,5 +114,8 @@ class DBHash:
         return True, {'name': name, 'type': type_, 'path': dirPath, 'hash': summ}
 
     def jsonCheckExist(self, summ):
-        return False
-        pass
+        k = False
+        for data in self.json_data['data']:
+            if data['hash'] == summ:
+                k = True
+        return k

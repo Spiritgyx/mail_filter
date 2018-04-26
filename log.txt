@@ -1,0 +1,8 @@
+Enter test json: {"ip": "200.200.200.200", "time": "2018-04-20;12:24:48", "path": "./test_img/test.png"}
+WARNING!
+hash: e6e503baadb0ca7df31996aa82777bd2b542e710c0cbce3f20d3b2f125edee36
+ip: 200.200.200.200
+path: ./test_img/test.png
+time: 2018-04-20;12:24:48
+Enter test json: {"ip": "200.200.200.200", "time": "2018-04-20;12:24:48", "path": "./images/3.jpg"}
+Enter test json:

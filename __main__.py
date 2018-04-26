@@ -27,14 +27,25 @@ class Main:
         self.dbh.jsonSave()
         # test sniffer
         self.ts = TS.TSniffer(debug=self.debug)
+        #print('st')
         self.ts.thread.start()
+        #print('con')
         summ = hashlib.sha256()
+        '''
         while True:
             if len(self.ts.data) > 0:
                 packet = self.ts.data.pop(0)
                 summ.update(packet[1])
                 if self.dbh.jsonCheckExist(summ.hexdigest()):
-                    pass
+                    pass'''
+        while not self.ts.exitFlag:
+            if len(self.ts.data) > 0:
+                packet = self.ts.data.pop(0)
+                if not self.dbh.jsonCheckExist(packet['hash']):
+                    print('WARNING!',
+                          '\nhash: {}\nip: {}\npath: {}\ntime: {}'.format(
+                              packet['hash'], packet['ip'], packet['path'], packet['time']
+                          ))
         pass
 
 
