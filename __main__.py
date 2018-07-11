@@ -1,4 +1,4 @@
-import sys
+import sys, json
 from dbhash import *
 import traffic_sniff as TS
 
@@ -31,6 +31,8 @@ class Main:
         self.ts.thread.start()
         #print('con')
         summ = hashlib.sha256()
+
+        logs = {"data": []}
         '''
         while True:
             if len(self.ts.data) > 0:
@@ -41,11 +43,17 @@ class Main:
         while not self.ts.exitFlag:
             if len(self.ts.data) > 0:
                 packet = self.ts.data.pop(0)
+
                 if not self.dbh.jsonCheckExist(packet['hash']):
+                    logFile = open('log.txt', mode='w')
+                    logs['data'].append(packet)
+                    logFile.write(json.dumps(logs, indent=2, sort_keys=True))
                     print('WARNING!',
                           '\nhash: {}\nip: {}\npath: {}\ntime: {}'.format(
                               packet['hash'], packet['ip'], packet['path'], packet['time']
                           ))
+                    logFile.close()
+
         pass
 
 

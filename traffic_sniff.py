@@ -2,6 +2,7 @@ from scapy.all import *
 import json, os, time
 import threading as TH
 from dbhash import checkHash
+import base64
 
 
 def hexRaw(sn):
@@ -43,6 +44,15 @@ class TSniffer:
                 time_ = js['time']
                 ip = js['ip']
                 if os.path.exists(path):
+                    file = open(path, mode='rb')
+                    b64 = str(base64.b64encode(file.read()), encoding='ascii')
+                    bData = []
+                    for i in range(len(b64) // 2**16 + int(len(b64) % 2**16 != 0)):
+                        bData.append(b64[i*2**16:(i+1)*2**16])
+                    #print(len(bData[0]))
+                    #print(bData[0])
+                    file.close()
+                    js.update({'b64': bData})
                     hash = checkHash(path)
                     js.update({'hash': hash})
                     self.data.append(js)
